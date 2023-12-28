@@ -4,6 +4,12 @@
     <section class="container mb-5">
         <form class="date my-5 w-50 mx-auto card border border-0 p-3 shadow" action="">
             <h2 class="text-center fw-semibold mb-5">Filter by date and location</h2>
+            @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>{{ session('error') }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div>
                 <label class="form-label fw-semibold" for="date">Departure date</label>
                 <input type="text" id="date" class="form-control" name="date" placeholder="{{ date('d-m-y') }}"
@@ -75,7 +81,7 @@
         @endif
         @if (!$trips->allTrips)
             <a class="btn btn-sm bg-primary fw-semibold text-light d-block mx-auto w-25 mt-5"
-                href="{{ route('trips') }}">Available trips</a>
+                href="{{ route('trips') }}">See All trips</a>
         @endif
     </section>
 @endsection

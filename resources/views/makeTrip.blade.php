@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="container">
-        <form class="w-50 mx-auto my-5 card p-5" method="post" action="{{ route('ticket.store') }}">
+        <form class="w-50 mx-auto my-5 card p-5" method="post" action="{{ route('trip.store') }}">
             @csrf
             @if (session('success'))
                 <div class="alert alert-primary alert-dismissible fade show" role="alert">

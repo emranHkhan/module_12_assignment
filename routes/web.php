@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [TripController::class, 'getLocations'])->name('home');
 Route::get('/trips', [TripController::class, 'index'])->name('trips');
-Route::post('/ticket/store', [TripController::class, 'store'])->name('ticket.store');
+Route::post('/trip/store', [TripController::class, 'store'])->name('trip.store');
 Route::get('/trip/{id}', [TripController::class, 'create'])->name('trip.create');
 Route::post('/confirmTrip', [TripController::class, 'submit'])->name('trip.submit');
 // Route::get('/create-location', [LocationController::class, 'index']);

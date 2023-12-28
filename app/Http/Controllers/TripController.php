@@ -16,8 +16,11 @@ class TripController extends Controller
         $date = $request->input('date');
         $from = $request->input('from');
         $to = $request->input('to');
+        $params = $request->all();
 
-        $locations = Location::all();
+        if (count($params) != 0 && empty($date)) {
+            return redirect()->back()->with('error', 'Please enter a date');
+        }
 
         if (!empty($date) && !empty($from) && !empty($to)) {
             $dateParts = explode('-', $date);
@@ -32,6 +35,7 @@ class TripController extends Controller
             $trips->allTrips = true;
         }
 
+        $locations = Location::all();
         return view('trips', ["trips" => $trips, "locations" => $locations]);
     }
 
@@ -83,7 +87,7 @@ class TripController extends Controller
 
         $trip = Trip::find($tripId);
 
-        return view("confirmTicket", ['trip' => $trip]);
+        return view("confirmTrip", ['trip' => $trip]);
     }
 
     public function submit(Request $request)
