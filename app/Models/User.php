@@ -10,9 +10,4 @@ class User extends Model
     use HasFactory;
 
     protected $fillable = ['trip_id', 'name', 'mobile'];
-
-    public function trips()
-    {
-        return $this->hasMany(Trip::class);
-    }
 }
