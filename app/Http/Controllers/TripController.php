@@ -6,6 +6,7 @@ use App\Models\Location;
 use App\Models\Trip;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class TripController extends Controller
@@ -107,9 +108,27 @@ class TripController extends Controller
             $user = new User($validatedData);
             $user->save();
 
+            $latestUser = User::latest()->first();
+
+            DB::table('trip_user')->insert([
+                'trip_id' => $tripId,
+                'user_id' => $latestUser->id,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
             return redirect()->route('trips');
         } catch (ValidationException $e) {
             return redirect()->back()->with('error', 'Failed to save data!');
         }
+    }
+
+
+
+    public function test()
+    {
+        $trip = Trip::with('user')->get();
+
+        return $trip;
     }
 }

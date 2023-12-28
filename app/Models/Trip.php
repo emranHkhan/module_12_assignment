@@ -10,4 +10,9 @@ class Trip extends Model
     use HasFactory;
 
     protected $fillable = ["from", "to", "departure_date", "departure_time", "seat_count"];
+
+    public function user()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
