@@ -108,6 +108,10 @@ class TripController extends Controller
             $user = new User($validatedData);
             $user->save();
 
+            $trip = Trip::find($tripId);
+            $trip->seat_count = $trip->seat_count - 1;
+            $trip->save();
+
             $latestUser = User::latest()->first();
 
             DB::table('trip_user')->insert([
@@ -121,5 +125,11 @@ class TripController extends Controller
         } catch (ValidationException $e) {
             return redirect()->back()->with('error', 'Failed to save data!');
         }
+    }
+
+    public function test()
+    {
+        $result = User::with('trips')->select('id', 'name')->get();
+        return $result;
     }
 }
