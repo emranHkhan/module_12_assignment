@@ -47,8 +47,8 @@ class TripController extends Controller
         $to = $request->input('to');
         $day = $request->input('day');
         $month = $request->input('month');
-        $departureTime = $request->input('departure_time'); // insert the modified version
-        $time_radio = $request->input('time_radio'); // don't insert in db
+        $departureTime = $request->input('departure_time');
+        $time_radio = $request->input('time_radio');
         $departureDate = ltrim($day, '0') . '-' . ltrim($month, '0') . '-' . date('Y');
         $departureTime = $time_radio === 'pm' ? $departureTime + 12 : $departureTime;
 
@@ -60,7 +60,6 @@ class TripController extends Controller
 
 
         $record = Trip::where('departure_date', $departureDate)->where('departure_time', $departureTime)->get();
-        // check if a trip already exists with the same date and time. If not, create otherwise send an alert saying it's already avaliable.
         if ($record->isEmpty()) {
             $trip = new Trip();
 
