@@ -122,13 +122,4 @@ class TripController extends Controller
             return redirect()->back()->with('error', 'Failed to save data!');
         }
     }
-
-
-
-    public function test()
-    {
-        $trip = Trip::with('user')->get();
-
-        return $trip;
-    }
 }
