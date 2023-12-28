@@ -11,7 +11,7 @@ class Trip extends Model
 
     protected $fillable = ["from", "to", "departure_date", "departure_time", "seat_count"];
 
-    public function user()
+    public function users()
     {
         return $this->belongsToMany(User::class);
     }
