@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Location;
 use App\Models\Trip;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -88,6 +89,9 @@ class TripController extends Controller
 
         $trip = Trip::find($tripId);
 
+        if (!$trip) {
+            return redirect()->route('trips');
+        }
         return view("confirmTrip", ['trip' => $trip]);
     }
 
